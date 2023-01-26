@@ -6,8 +6,11 @@ import Panorama from "./components/Panorama";
 export default function App() {
   return (
       <div className="App">
-        <h1 className="text-5xl font-bold text-blue-600 text-center my-10">Projet 5A</h1>
-        <Panorama src="test2.jpeg" />
+        <h1 className="animate-text bg-gradient-to-r from-emerald-500 to-blue-500 bg-clip-text text-transparent text-5xl font-black text-center my-10">
+          Pannellum Maker
+        </h1>
+        <Panorama src="test2.jpeg"/>
       </div>
     );
 }
+
