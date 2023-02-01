@@ -15,3 +15,57 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.link-underline {
+  border-bottom-width: 0;
+  background-image: linear-gradient(transparent, transparent), linear-gradient(#fff, #fff);
+  background-size: 0 2px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size .5s ease-in-out;
+}
+
+.link-underline-black {
+  background-image: linear-gradient(transparent, transparent), linear-gradient(black, black)
+}
+
+.link-underline-white {
+  background-image: linear-gradient(transparent, transparent), linear-gradient(white, white)
+}
+
+.link-underline:hover {
+  background-size: 100% 2px;
+  background-position: 0 100%
+}
+
+@layer components {
+  .animate{
+    display: flex;
+    animation: scroll 20s linear infinite;
+  }
+  
+  .animate:hover{
+    animation-play-state: paused;
+  }
+
+  .animate-reversed{
+    display: flex;
+    animation: scroll 40s linear infinite;
+    animation-direction: reverse;
+  }
+  .animate-reversed:hover{
+    animation-play-state: paused;
+  }
+
+  @keyframes scroll {
+    0%{
+
+      transform: translateX(0);
+    }
+    100%{
+
+      transform: translate(-50%);
+    }
+  }
+
+}
