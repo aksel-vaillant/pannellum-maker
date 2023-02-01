@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import "./index.css";
 import Panorama from "./components/Panorama";
-import { StepperControl, StepperItem, StepperList, Button, Row, Logo} from "./components/design";
+import { StepperControl, StepperItem, StepperList, Navbar} from "./components/design";
 
 import reportWebVitals from './reportWebVitals';
 
@@ -38,50 +38,7 @@ export default function App() {
   return (
       <>
         <div className="w-10/12 mx-auto">
-          <Row>
-              <Logo/>
-            
-              <Button className="basis-1/12 link link-underline link-underline-black"
-                text="Home"
-                noHover
-                noBackground
-                function={() => {
-                  alert("WIP - In Progress");
-                }}
-              />
-
-            <Button className="basis-1/12 link link-underline link-underline-black"
-              text="Gallery"
-              noHover noBackground
-              function={() => {
-                alert("WIP - In Progress");
-              }}
-            />           
-            
-            <Button className="basis-1/12 link link-underline link-underline-black"
-              text="My favorites"
-              noHover noBackground
-              function={() => {
-                alert("WIP - In Progress");
-              }}
-            />
-
-            <Button className="basis-1/12 link link-underline link-underline-black"
-              text="Help"
-              noHover noBackground
-              function={() => {
-                alert("WIP - In Progress");
-              }}
-            />                  
-
-            <Button className="basis-1/12"
-                text="Sign up"
-                noHover
-                function={() => {
-                  alert("WIP - In Progress");
-                }}
-              />      
-          </Row>
+          <Navbar/>
 
           <StepperList>
               <StepperItem number="1" name="Pick your scene" validated={step === 1 || step === 2} current={step === 0}></StepperItem>

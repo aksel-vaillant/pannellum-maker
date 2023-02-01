@@ -248,11 +248,6 @@ export default function Panorama (props) {
 
     return (
         <div id="panorama">
-
-            
-    
-
-
             {
                 // These data appears only when you click on a hotspot
             }
@@ -271,7 +266,7 @@ export default function Panorama (props) {
                 pitch={0}
                 yaw={50}
                 hfov={120}
-                autoLoad
+                //autoLoad
                 autoRotate={8}
                 showControls
 
