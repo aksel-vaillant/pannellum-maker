@@ -1,3 +1,5 @@
+import React from 'react';
+
 function StepperSeparator(){
     return(
         <span className="hidden sm:inline-flex sm:ml-2"></span>    
