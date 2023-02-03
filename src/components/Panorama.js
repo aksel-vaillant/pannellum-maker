@@ -21,6 +21,27 @@ function HotSpot(props){
     );
 }
 
+function getHotspot(panImage){
+    // Can save the scene with this function~
+    let v = panImage.current.getViewer().getConfig();    
+
+    // Make an array with hotspot
+    var hotspotArray = [];
+    for (var i in v.hotSpots) {
+        hotspotArray.push({
+            type : "custom",
+            pitch : v.hotSpots[i].pitch,
+            yaw : v.hotSpots[i].yaw,
+            createTooltipFunc: v.hotSpots[i].hotspotTooltip,
+            createTooltipArgs: v.hotSpots[i].createTooltipArgs,
+            clickHandlerFunc: v.hotSpots[i].handlerFunc,
+            clickHandlerArgs: v.hotSpots[i].clickHandlerArgs
+        });
+    }
+
+    return hotspotArray;
+}
+
 function addHotspot(panImage, pitch, yaw){
     // Parameters of the hotspot
     //let imgSrc = "https://img.icons8.com/material/" + myColor.replace("#","") + "/256/camera.png";
@@ -75,7 +96,7 @@ function addHotspot(panImage, pitch, yaw){
     }
 
     // Create the handler function
-    let handlerFunc = () => {
+    let handlerFunc = (hotSpot) => {
         console.log(dataHotSpot.name);
         panImage.current.getViewer().lookAt(pitch, yaw); //  To add hfov and animation's duration = 120, 1000);
 
@@ -257,21 +278,13 @@ export default function Panorama (props) {
 
     return (
         <div id="panorama">
-            {
-                // These data appears only when you click on a hotspot
-            }
-            <div>
-                <h1 className="text-red-500 text-4xl my-6 font-bold" id="titre"></h1>
-                <p className="text-left text-black text-xl" id="description"></p>
-            </div>
-            
-
             <Pannellum
                 ref={panImage}
                 id="firstScene"
 
                 width="100%"
                 image={props.src}
+                preview={props.src}
                 pitch={0}
                 yaw={50}
                 hfov={120}
@@ -291,13 +304,19 @@ export default function Panorama (props) {
                     setYaw(panImage.current.getViewer().mouseEventToCoords(evt)[1]);
                 }}
             >
-
-            
             </Pannellum>
             
 
+            {
+                // These data appears only when you click on a hotspot
+            }
+            <div>
+                <h1 className="text-red-500 text-4xl my-6 font-bold" id="titre"></h1>
+                <p className="text-left text-black text-xl" id="description"></p>
+            </div>
+            
+
             <Callout center>
-                <h1 className="text-xl underline mb-2">Outils</h1>
 
                 {
                     //<h1 className="text-xl underline mb-2">Données</h1>
@@ -306,31 +325,32 @@ export default function Panorama (props) {
 
                 <Row>
                     <Button 
-                        text="Ajouter un hotspot"
-                        emote="✨"
-                        noHover
+                        size="large"
                         function={() => {
                             addHotspot(panImage, pitch, yaw);
-                        }}
-                    />
-                    <Button 
-                        text="Afficher les hotspots"
-                        emote="🎯"
-                        noHover 
+                        }}>
+                            Ajouter un hotspot 
+                            <span className={`ml-1 animate-waving-hand`}>✨</span>
+                    </Button>
+
+                    <Button
+                        size="large" 
                         function={() => {
                             setEdit(editHotspot(panImage));
-                        }}
-                    />
+                        }}>
+                            Voir la configuration 
+                            <span className={`ml-1 animate-waving-hand`}>🎯</span>
+                    </Button>
+
                     <Button 
-                        text="Exporter en JSON"
-                        emote="🚀" animation
-                        color="bg-teal-400"
-                        colorHover="hover:bg-lime-300"
-                        noHover
+                        variant="light"
+                        size="large"
                         function={() => {
                             setJSON(convertToJSON(panImage));
-                        }}
-                    />
+                        }}>
+                            Exporter en JSON 
+                            <span className={`ml-1 animate-waving-hand`}>🚀</span>
+                    </Button>
                 </Row>                
             </Callout>
 
