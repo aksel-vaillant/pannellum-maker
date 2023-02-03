@@ -11,23 +11,21 @@ export default function StepperControl(props){
     return (
         <Row className="items-end">
             <Button 
-                text="Previous"
-                emote="⏮️"
+                variant="dark"                 
                 disabled={step === min}
-                noHover
-                function={() => {
-                    props.onPrevious()
-                }}
-            />      
+                className="hover:animate-headShake"
+                function={() => { props.onPrevious()}}>
+                    <span className={`mr-2 animate-wavingHand`}>⏮️</span>
+                    Previous
+            </Button>
             <Button 
-                text="Next"
-                emote="⏭️"
+                variant="dark"                 
                 disabled={step === max}
-                noHover
-                function={() => {
-                    props.onNext()
-                }}
-            />      
+                className="hover:animate-headShake"
+                function={() => { props.onNext()}}>
+                    Next
+                    <span className={`ml-2 animate-wavingHand`}>⏭️</span>
+            </Button>
     </Row>
     )
 }
