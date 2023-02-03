@@ -1,12 +1,14 @@
 import React from "react";
 
 import Panorama from "../components/Panorama";
-import { StepperControl, StepperItem, StepperList} from "../components/design";
+import { Button, StepperControl, StepperItem, StepperList} from "../components/design";
 
 function StepperPanel(props) {
+
   if (props.value === 1) {
       return (<div className="h-96" style={{ color: 'red' }}>
           <h1>Pick your scene stuff</h1>
+          <input type="file"/>
       </div>)
   }
   else {
