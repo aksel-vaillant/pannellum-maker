@@ -5,16 +5,19 @@ import "./index.css";
 import reportWebVitals from './reportWebVitals';
 
 import { Navbar } from "./components/design";
-import Home from "./pages/Home"
 
 export default function App() {
   
 
   return (
       <>
-        <div className="w-10/12 mx-auto">
+        <div className="bg-cover bg-[url('/public/backGround.jpg')] w-full h-screen">   
+          <div className="w-10/12 mx-auto">
             <Navbar/>
-        </div>        
+          </div>       
+        </div>   
+
+        
       </>
     );
 }
