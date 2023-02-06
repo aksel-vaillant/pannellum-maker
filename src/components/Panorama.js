@@ -3,6 +3,9 @@ import { Pannellum } from "pannellum-react";
 
 import {Callout, Row, Button} from "./design";
 
+// Référence pour les hotspots => plus simple à manipuler dans la globalité
+let hotspots = [];
+
 function HotSpot(props){
     return ( 
         <Pannellum.Hotspot
@@ -23,13 +26,14 @@ function HotSpot(props){
 
 function getHotspot(panImage){
     // Can save the scene with this function~
-    let v = panImage.current.getViewer().getConfig();    
-
+    let v = panImage.current.getViewer().getConfig(); 
+    
     // Make an array with hotspot
     var hotspotArray = [];
     for (var i in v.hotSpots) {
-        hotspotArray.push({
-            type : "custom",
+        hotspotArray.push({            
+            type : v.hotSpots[i].type,
+            id : v.hotSpots[i].id,
             pitch : v.hotSpots[i].pitch,
             yaw : v.hotSpots[i].yaw,
             createTooltipFunc: v.hotSpots[i].hotspotTooltip,
@@ -44,6 +48,7 @@ function getHotspot(panImage){
 
 function addHotspot(panImage, pitch, yaw){
     // Parameters of the hotspot
+    
     //let imgSrc = "https://img.icons8.com/material/" + myColor.replace("#","") + "/256/camera.png";
     let imgSrc = "https://img.icons8.com/material/3b82f6/256/camera.png";
 
@@ -95,13 +100,21 @@ function addHotspot(panImage, pitch, yaw){
         description : Math.random()
     }
 
+    // Make an array with hotspot
+
+    let arrayHS = getHotspot(panImage);
+    let lastID = 0;
+    if(arrayHS.length > 0){
+        lastID = arrayHS[arrayHS.length-1].id;
+    }
+    var newID = lastID + 1;
+
     // Create the handler function
-    let handlerFunc = (hotSpot) => {
-        console.log(dataHotSpot.name);
+    let handlerFunc = () => {
         panImage.current.getViewer().lookAt(pitch, yaw); //  To add hfov and animation's duration = 120, 1000);
 
-        document.getElementById("titre").innerHTML = dataHotSpot.name;
-        document.getElementById("description").innerHTML = dataHotSpot.description;
+        document.getElementById("titre").innerHTML = "HotSpot n*" + newID;
+        document.getElementById("description").innerHTML = dataHotSpot.name + ' -- ' + dataHotSpot.description;
 
         /*const hDiv = document.createElement('h1');
         hDiv.classList.add("text-red-600");
@@ -110,9 +123,10 @@ function addHotspot(panImage, pitch, yaw){
 
         test.appendChild(hDiv);*/
     }
-
+    
     // Add a hotspot
     panImage.current.getViewer().addHotSpot({
+        id : newID,
         type : "custom",
         pitch : pitch,
         yaw : yaw,
@@ -123,37 +137,43 @@ function addHotspot(panImage, pitch, yaw){
     });
 }
 
-function editHotspot(panImage){
-    // Can save the scene with this function~
-    let v = panImage.current.getViewer().getConfig();    
-
-    // Make an array with hotspot
-    var hotspotArray = [];
-    for (var i in v.hotSpots) {
-        hotspotArray.push({
-            type : "custom",
-            pitch : v.hotSpots[i].pitch,
-            yaw : v.hotSpots[i].yaw,
-            createTooltipFunc: v.hotSpots[i].hotspotTooltip,
-            createTooltipArgs: v.hotSpots[i].createTooltipArgs,
-            clickHandlerFunc: v.hotSpots[i].handlerFunc,
-            clickHandlerArgs: v.hotSpots[i].clickHandlerArgs
-        });
+function delHotspot(panImage, id){
+    let bool = panImage.current.getViewer().removeHotSpot(id);
+    if(!bool){
+        alert("Hotspot " + id + " pas supprimé");
     }
+    return;
+}
+
+function listHotspot(panImage){ 
+    // Make an array with hotspot
+    var hotspotArray = getHotspot(panImage);
     
-    let data = hotspotArray.map((hotspot) => (     
-        <tr key={hotspot.clickHandlerArgs.name}>
-            <td>{hotspot.clickHandlerArgs.name}</td>
+    let data = hotspotArray.map((hotspot) => (
+        <tr key={hotspot.id}>
+            <td>{hotspot.id}</td>
             <td>{hotspot.clickHandlerArgs.description}</td>
+            <td>
+                <Button 
+                    variant="warning" size="min"
+                    function={() => {
+                        delHotspot(panImage, hotspot.id);
+                    }}>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                </Button>
+            </td>
         </tr>
     ));
     
     let table = (() => (
-        <table className="table-fixed">
+        <table className="table-auto border-spacing-6 border-separate">
             <thead>
                 <tr>
-                    <th>Name</th>
+                    <th>ID</th>
                     <th>Description</th>
+                    <th>Tools</th>
                 </tr>
             </thead>
             <tbody>
@@ -170,18 +190,7 @@ function convertToJSON(panImage){
     let v = panImage.current.getViewer().getConfig();    
 
     // Make an array with hotspot
-    var hotspotArray = [];
-    for (var i in v.hotSpots) {
-        hotspotArray.push({
-            type : "custom",
-            pitch : v.hotSpots[i].pitch,
-            yaw : v.hotSpots[i].yaw,
-            createTooltipFunc: v.hotSpots[i].hotspotTooltip,
-            createTooltipArgs: v.hotSpots[i].createTooltipArgs,
-            clickHandlerFunc: v.hotSpots[i].handlerFunc,
-            clickHandlerArgs: v.hotSpots[i].clickHandlerArgs
-        });
-    }
+    var hotspotArray = getHotspot(panImage);
 
     // Create json data
     var jsonConfig = {
@@ -220,14 +229,16 @@ function convertToJSON(panImage){
         onRender: v.onRender
     };
 
-    const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+    // Permet de faire un fichier json
+
+    /*const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
         JSON.stringify(jsonConfig)
     )}`;
     const link = document.createElement("a");
     link.href = jsonString;
     link.download = "data.json";
 
-    link.click();
+    link.click();*/
 
     return jsonConfig;
 }
@@ -239,7 +250,7 @@ export default function Panorama (props) {
     let [pitch, setPitch] = React.useState(0);
 
     let [json, setJSON] = React.useState(0);
-    let [edit, setEdit] = React.useState(0);
+    let [edit, setList] = React.useState(0);
 
     // Données hotspots
     
@@ -335,9 +346,9 @@ export default function Panorama (props) {
                     <Button
                         size="large" 
                         function={() => {
-                            setEdit(editHotspot(panImage));
+                            setList(listHotspot(panImage));
                         }}>
-                            Voir la configuration 🎯
+                            Voir la liste 🎯
                     </Button>
 
                     <Button 
@@ -354,7 +365,7 @@ export default function Panorama (props) {
             {
                 json !== 0 && (
                 
-                <Callout>
+                <Callout className="my-5">
                     <pre>
                         {JSON.stringify(json, null, 2)}
                     </pre>
@@ -364,13 +375,10 @@ export default function Panorama (props) {
             {
                 edit !== 0 && (
                 
-                <Callout>
+                <Callout className="my-5">
                     {edit}
                 </Callout>)
             }
         </div>
     );
 };
-
-//                 {//listHotSpots}
-
