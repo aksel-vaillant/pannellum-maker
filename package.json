@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "better-react-carousel": "^1.1.1",
     "pannellum": "^2.5.6",
     "pannellum-react": "^1.2.4",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-responsive-carousel": "^3.2.23",
+    "react-photo-gallery": "^8.0.0",
     "react-router-dom": "^6.8.0",
     "react-scripts": "^5.0.1",
     "web-vitals": "^2.1.4"

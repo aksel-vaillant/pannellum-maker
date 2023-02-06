@@ -1,11 +1,13 @@
 import React from 'react';
 
 const classes = { 
-    disabled : `hover:cursor-not-allowed opacity-50 `,       
-    state : {
-        default : `hover:cursor-pointer`,    
-        hover : `hover:cursor-pointer transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200`,
-    },
+    disabled : `hover:cursor-not-allowed opacity-50`,
+    animation : {
+        default : `hover:cursor-pointer`,
+        underline : `link link-underline link-underline-black `,
+        shake : `hover:animate-headShake`,
+        bounce : `animate-bounce`
+    },       
     round : {
         classic : ``,
         medium : `rounded-sm`,
@@ -17,7 +19,7 @@ const classes = {
         large: 'w-56'
     },
     variant : {
-        classic : `link link-underline link-underline-black text-black font-medium`,
+        classic : `text-black font-medium`,
         default : `bg-blue-500 hover:bg-blue-600 text-white font-medium`,
         light : `bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium`,
         dark : `bg-gray-800 hover:bg-gray-900 text-white font-medium`,
@@ -37,9 +39,9 @@ export default function Button(props) {
         size = classes.size[props.size];
     }
 
-    let state = classes.state.default;
-    if(props.state && !props.disabled && classes.state[props.state] !== "undefined"){
-        state = classes.state[props.state];
+    let animation = classes.animation.default;
+    if(props.animation && !props.disabled && classes.animation[props.animation] !== "undefined"){
+        animation += " " + classes.animation[props.animation];
     }
 
     let variant = classes.variant.default;
@@ -50,10 +52,10 @@ export default function Button(props) {
     let disabled = "";
     if(props.disabled){
         disabled = classes.disabled; 
-        state = "";
+        animation = "";
     }
 
-    let styled = disabled + " " + round + " " + size + " " + state + " " + variant + " " + (props.className ? props.className : ""); 
+    let styled = disabled + " " + round + " " + size + " " + animation + " " + variant + " " + (props.className ? props.className : ""); 
     
     return(
         <>

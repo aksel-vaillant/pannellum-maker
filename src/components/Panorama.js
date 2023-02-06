@@ -329,8 +329,7 @@ export default function Panorama (props) {
                         function={() => {
                             addHotspot(panImage, pitch, yaw);
                         }}>
-                            Ajouter un hotspot 
-                            <span className={`ml-1 animate-waving-hand`}>✨</span>
+                            Ajouter un hotspot ✨
                     </Button>
 
                     <Button
@@ -338,8 +337,7 @@ export default function Panorama (props) {
                         function={() => {
                             setEdit(editHotspot(panImage));
                         }}>
-                            Voir la configuration 
-                            <span className={`ml-1 animate-waving-hand`}>🎯</span>
+                            Voir la configuration 🎯
                     </Button>
 
                     <Button 
@@ -348,8 +346,7 @@ export default function Panorama (props) {
                         function={() => {
                             setJSON(convertToJSON(panImage));
                         }}>
-                            Exporter en JSON 
-                            <span className={`ml-1 animate-waving-hand`}>🚀</span>
+                            Exporter en JSON 🚀
                     </Button>
                 </Row>                
             </Callout>

@@ -5,6 +5,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      backgroundImage : {
+        test : "url('/public/test2.jpeg')",
+      },
       keyframes: {
         text: {
           '0%, 100%': {

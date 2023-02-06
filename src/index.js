@@ -11,13 +11,11 @@ export default function App() {
 
   return (
       <>
-        <div className="bg-cover bg-[url('/public/backGround.jpg')] w-full h-screen">   
+        <div className="bg-cover bg-[url('/public/hhh.png')] w-full h-screen">   
           <div className="w-10/12 mx-auto">
             <Navbar/>
           </div>       
-        </div>   
-
-        
+        </div>
       </>
     );
 }

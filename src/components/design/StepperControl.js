@@ -13,7 +13,7 @@ export default function StepperControl(props){
             <Button 
                 variant="dark"                 
                 disabled={step === min}
-                className="hover:animate-headShake"
+                animation="shake"
                 function={() => { props.onPrevious()}}>
                     <span className={`mr-2 animate-wavingHand`}>⏮️</span>
                     Previous
@@ -21,7 +21,7 @@ export default function StepperControl(props){
             <Button 
                 variant="dark"                 
                 disabled={step === max}
-                className="hover:animate-headShake"
+                animation="shake"
                 function={() => { props.onNext()}}>
                     Next
                     <span className={`ml-2 animate-wavingHand`}>⏭️</span>

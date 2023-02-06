@@ -5,7 +5,7 @@ import Row from "./Row";
 import Button from "./Button";
 
 import Home from '../../pages/Home'
-import Gallery from '../../pages/Gallery'
+import PanGallery from '../../pages/Gallery'
 import Favorites from '../../pages/Favorites'
 import Help from '../../pages/Help'
 import Edit from '../../pages/Edit'
@@ -18,19 +18,19 @@ export default function Navbar(props){
             <Row>
                 <Logo></Logo>
         
-                <Button variant="classic" size="small">
+                <Button variant="classic" size="small" animation="underline">
                     <Link to="/">Home</Link>
                 </Button>
 
-                <Button variant="classic" size="small">
+                <Button variant="classic" size="small" animation="underline">
                     <Link to="/gallery">Gallery</Link>
                 </Button>
 
-                <Button variant="classic">
+                <Button variant="classic" animation="underline">
                     <Link to="/favorites">My favorites</Link>
                 </Button>
 
-                <Button variant="classic" size="small">
+                <Button variant="classic" size="small" animation="underline">
                     <Link to="/help">Help</Link>
                 </Button>
 
@@ -41,7 +41,7 @@ export default function Navbar(props){
             
             <Routes>
                 <Route exact path='/' element={<Home/>}></Route>
-                <Route exact path='/gallery' element={< Gallery />}></Route>
+                <Route exact path='/gallery' element={< PanGallery />}></Route>
                 <Route exact path='/favorites' element={< Favorites />}></Route>
                 <Route exact path='/help' element={< Help />}></Route>
                 <Route exact path='/edit' element={< Edit />}></Route>

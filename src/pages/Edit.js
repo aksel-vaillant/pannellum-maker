@@ -1,15 +1,18 @@
 import React from "react";
 
 import Panorama from "../components/Panorama";
-import { Button, StepperControl, StepperItem, StepperList} from "../components/design";
+
+import { StepperControl, StepperItem, StepperList} from "../components/design";
 
 function StepperPanel(props) {
 
   if (props.value === 1) {
-      return (<div className="h-96" style={{ color: 'red' }}>
-          <h1>Pick your scene stuff</h1>
-          <input type="file"/>
-      </div>)
+      return (
+        <div className="h-96" style={{ color: 'red' }}>
+                <h1>Pick your scene stuff</h1>
+                <input type="file"/>
+        </div>
+      )
   }
   else {
       if (props.value === 2) {
@@ -19,9 +22,11 @@ function StepperPanel(props) {
 
       }
       else {
-          return (<div className="h-96" style={{ color: 'orange' }}>
-              <h1>Good job! Now, share it with your friends or directly on your website</h1>
-          </div>)
+          return (
+            <div className="h-96" style={{ color: 'orange' }}>
+                <h1>Good job! Now, share it with your friends or directly on your website</h1>
+            </div>
+          )
       }
   }
 }
