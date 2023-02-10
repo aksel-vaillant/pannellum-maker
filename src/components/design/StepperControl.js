@@ -9,7 +9,7 @@ export default function StepperControl(props){
     let max = props.max;
 
     return (
-        <Row className=" items-end">
+        <Row justify="justify-between" gap="gap-7">
             <Button 
                 variant="dark"                 
                 disabled={step === min}

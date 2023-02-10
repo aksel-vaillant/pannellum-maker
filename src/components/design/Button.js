@@ -14,7 +14,7 @@ const classes = {
         full : `rounded-full`,
     },
     size : {
-        min : "",
+        min : ``,
         small : 'w-28',
         normal: 'w-36',
         large: 'w-56'
