@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@headlessui/react": "^1.7.10",
+    "@headlessui/tailwindcss": "^0.1.2",
+    "@heroicons/react": "^2.0.14",
     "pannellum": "^2.5.6",
     "pannellum-react": "^1.2.4",
     "react": "^16.13.0",
