@@ -16,7 +16,7 @@ export default function Example(props) {
   }
 
   return (
-    <div className="z-40 w-56 text-right">
+    <div className="z-40 w-56">
       <Menu as="div" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex w-full justify-center rounded-md bg-black px-4 py-2 text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
@@ -33,14 +33,14 @@ export default function Example(props) {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <div onSubmit={handleSubmit} className="px-1 py-1 ">
+          <Menu.Items className="absolute mt-2 w-56 origin-top-left divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <div onSubmit={handleSubmit} className="px-1 py-1">
               {props.sort.map((s) =>(
                 <Menu.Item key={s.id} onChange={handleChange}>
                   {({ active }) => (
-                    <button type='submit' onClick={() => {props.valueChangeCallback(s.function)}}
+                    <button type='submit' onClick={() => {props.valueChangeCallback(s.id)}}
                       className={`${
-                        active ? 'bg-violet-500 text-white' : 'text-gray-900'
+                        active ? 'bg-violet-500 text-white after:text-red-500' : 'text-gray-900'
                       } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
                     >
                       {s.name} 
