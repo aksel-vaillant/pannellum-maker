@@ -7,7 +7,7 @@ export default function Home(props){
     return(
         <>
             <div className="my-44 flex items-center flex-col gap-y-5">
-                <p className="text-3xl my-5 text-bold">Create stunning 360° views with ease using our full automated tool<br/>Add hotspots, points of interest, images, and more - all for free!</p>
+                <p className="text-3xl my-5 text-bold">Discover an innovative way to mount your 360° photos<br/>Add hotspots, points of interest, images, and more - all for free!</p>
 
                 <Button variant="dark" size="normal">
                     <Link to="/edit">Get started 🚀</Link>
@@ -20,10 +20,3 @@ export default function Home(props){
         </> 
     )
 }
-
-/*
-                <p className="text-3xl my-5 text-center text-bold">Discover an innovative way to mount your 360° photos<br/> in order to highlight them and show them to your loved ones!</p>
-
-                <h2 className="text-2xl my-12">Community projects :</h2>
-
-*/
