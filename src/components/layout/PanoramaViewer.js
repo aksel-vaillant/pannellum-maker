@@ -1,6 +1,6 @@
 import React from "react";
 import { Pannellum } from "pannellum-react";
-import data from "data.json";
+import data from "./data.json";
 
 function HotSpot(props){
     return ( 
@@ -25,15 +25,16 @@ export default function PanoramaViewer (props) {
     const panImage = React.useRef();
 
     // Données à partir du fichier config JSON
-    let panConfig = JSON.parse(data);  
+    let panConfig = data;  
 
     // Données hotspots
     let hotspots = panConfig.hotSpots;
+    console.log(panConfig);
 
     // Pour initialiser les hotspots sur la map
-    let listHotSpots = hotspots.map((hotspot) => (     
+    let listHotSpots = hotspots.map((hotspot, index) => (     
         <HotSpot 
-            id={hotspot.id} key={hotspot.id} 
+            id={hotspot.id} key={index} 
             type={hotspot.type} 
             name={hotspot.name} 
             pitch={hotspot.pitch} yaw={hotspot.yaw}
@@ -72,7 +73,7 @@ export default function PanoramaViewer (props) {
                 onScenechange={(id)=>{console.log("Scene has change on " + id);}}
                 onError={(err)=>{console.log("Error" , err);}}
                 
-            />     
+            >{listHotSpots}</Pannellum>     
         </div>
     );
 };

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import {Button} from "../components/design"
+import FsLightbox from "fslightbox-react";
 
 import { Link } from 'react-router-dom'
+import PanoramaViewer from "../components/layout/PanoramaViewer";
 
 export default function Home(props){
+
+    const [toggler, setToggler] = useState(false);
+    const ref = React.createRef();
+
     return(
         <>
             <div className="my-44 flex items-center flex-col gap-y-5">
@@ -17,6 +23,16 @@ export default function Home(props){
             <div className="flex items-center flex-col">
                 <img className="animate-bounce" alt="Bouncing arrow pointing under the main page" src="https://img.icons8.com/ios-filled/50/null/double-down.png"/>
             </div>
+
+            <button ref={ref} onClick={() => setToggler(!toggler)}>
+				<img src="../test2.jpeg" />
+			</button>
+			<FsLightbox
+				toggler={toggler}
+				sources={[
+                    <PanoramaViewer src="../test2.jpeg"/>
+				]}
+			/>
         </> 
     )
 }
