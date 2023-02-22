@@ -6,24 +6,6 @@ import {Callout, Row, Button} from "./design";
 import * as Slider from '@radix-ui/react-slider';
 import "../styles/@radix-ui_slider.css";
 
-function HotSpot(props){
-    return ( 
-        <Pannellum.Hotspot
-            // Type custom => gérer un event
-            id={props.id}
-            type={props.type}                    
-            name={props.name ? props.name : null}
-            pitch={props.pitch}
-            yaw={props.yaw}
-
-            text={props.text ? props.text : null}
-            URL={props.URL ? props.URL : null}
-
-            handleClick={(evt, name) => console.log(name)}
-        />
-    );
-}
-
 export default function PanoramaHandler (props) {
     // Référence pour les hotspots => plus simple à manipuler dans la globalité
     let [idHS, setIDHS] = React.useState(0);
@@ -60,9 +42,10 @@ export default function PanoramaHandler (props) {
                 id : v.hotSpots[i].id,
                 pitch : v.hotSpots[i].pitch,
                 yaw : v.hotSpots[i].yaw,
-                createTooltipFunc: v.hotSpots[i].hotspotTooltip,
+
+                createTooltipFunc: v.hotSpots[i].createTooltipFunc,
                 createTooltipArgs: v.hotSpots[i].createTooltipArgs,
-                clickHandlerFunc: v.hotSpots[i].handlerFunc,
+                clickHandlerFunc: v.hotSpots[i].clickHandlerFunc,
                 clickHandlerArgs: v.hotSpots[i].clickHandlerArgs
             });
         }
@@ -134,13 +117,6 @@ export default function PanoramaHandler (props) {
 
             document.getElementById("titre").innerHTML = "HotSpot n*" + newID;
             document.getElementById("description").innerHTML = dataHotSpot.name + ' -- ' + dataHotSpot.description;
-
-            /*const hDiv = document.createElement('h1');
-            hDiv.classList.add("text-red-600");
-            hDiv.classList.add("text-3xl");
-            hDiv.innerHTML = dataHotSpot.name;
-
-            test.appendChild(hDiv);*/
         }
         
         // Add a hotspot
@@ -171,8 +147,8 @@ export default function PanoramaHandler (props) {
         let data = hotspotArray.map((hotspot) => (
             <tr key={hotspot.id}>
                 <td>{hotspot.id}</td>
-                <td>{hotspot.clickHandlerArgs.name}</td>
-                <td>{hotspot.clickHandlerArgs.description}</td>
+                <td>{hotspot.handleClickArg.name}</td>
+                <td>{hotspot.handleClickArg.description}</td>
                 <td>
                     <Button 
                         variant="warning" size="min"
@@ -246,58 +222,27 @@ export default function PanoramaHandler (props) {
             showFullscreenCtrl: v.showFullscreenCtrl,
             showControls: v.showControls,
             hotSpotDebug: v.hotspotDebug,
+
             hotSpots: hotspotArray,
+            
             onRender: v.onRender
         };
 
         // Permet de faire un fichier json
-
-        /*const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
+        const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
             JSON.stringify(jsonConfig)
         )}`;
         const link = document.createElement("a");
         link.href = jsonString;
         link.download = "data.json";
 
-        link.click();*/
-
+        link.click();
         return jsonConfig;
     }
 
     function toggleScreen(){
         panImage.current.getViewer().toggleFullscreen();
     }
-    
-    // Données hotspots
-    /*let hotspots = [
-        {
-            id : 0,
-            type : "custom",
-            name : "image info",
-            pitch : 12.41,
-            yaw : 117.76
-        },{
-            id : 1,
-            type : "info",
-            pitch : 11,
-            yaw : -167,
-            text : "Info Hotspot Text", 
-            //URL : "https://github.com/farminf"
-        }
-    ]
-
-    // Pour initialiser les hotspots sur la map
-    let listHotSpots = hotspots.map((hotspot) => (     
-        <HotSpot 
-            id={hotspot.id} key={hotspot.id} 
-            type={hotspot.type} 
-            name={hotspot.name} 
-            pitch={hotspot.pitch} yaw={hotspot.yaw}
-            text={hotspot.text} URL={hotspot.URL}
-            handleClick={(evt, name) => console.log(name)}
-        />
-    ));
-    */
 
     return (
         <div id="panorama">
@@ -374,10 +319,6 @@ export default function PanoramaHandler (props) {
                 }}
             >   
             </Pannellum>
-            {
-
-}
-            
 
             {
                 // These data appears only when you click on a hotspot
@@ -389,12 +330,6 @@ export default function PanoramaHandler (props) {
             
 
             <Callout center>
-
-                {
-                    //<h1 className="text-xl underline mb-2">Données</h1>
-                    //<p>Pitch = {pitch} <br/> Yaw = {yaw}</p>
-                }
-
                 <Row justify="justify-between" gap="gap-7">
                     <Button 
                         size="large"

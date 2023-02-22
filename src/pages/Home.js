@@ -24,13 +24,14 @@ export default function Home(props){
                 <img className="animate-bounce" alt="Bouncing arrow pointing under the main page" src="https://img.icons8.com/ios-filled/50/null/double-down.png"/>
             </div>
 
-            <button ref={ref} onClick={() => setToggler(!toggler)}>
-				<img src="../test2.jpeg" />
-			</button>
+			<img src="../test2.jpeg" onClick={() => setToggler(!toggler)} className="hover:cursor-pointer" alt=""/>
+
 			<FsLightbox
 				toggler={toggler}
 				sources={[
-                    <PanoramaViewer src="../test2.jpeg"/>
+                    <div style={{ width: "1000px", height: "600px" }}>
+                        <PanoramaViewer forwardedRef={ref} src="../test2.jpeg"/>
+                    </div>
 				]}
 			/>
         </> 
