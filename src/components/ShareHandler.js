@@ -2,14 +2,19 @@ import React from "react";
 import { EmailShareButton, EmailIcon, FacebookMessengerShareButton, FacebookMessengerIcon, LinkedinShareButton, LinkedinIcon, TwitterShareButton, TwitterIcon, FacebookShareButton, FacebookIcon } from 'react-share';
 import Divider from "@material-ui/core/Divider";
 import ClipboardCopy from "./design/CopyButton";
+import { Row } from "../components/design";
+import FsLightbox from "fslightbox-react";
 
 export default function ShareHandler(props){
     return(
         <>
-        <div className="border border-black shadow-inner shadow-xl ml-40 w-1/4 bg-white shadow-lg rounded-2xl">
+        <h1 className="text-center mb-11 text-3xl font-medium text-gray-800">Good job! Now, share it with your friends or directly on your socials</h1>
+        <Row>
+            <img className="border-2 border-black max-w-4xl" src={props.src}/>
+            <div className="border border-black shadow-inner shadow-xl ml-40 w-1/4 bg-white shadow-lg rounded-2xl">
             <div className="mt-4 flex justify-center">
                 <h1 className="mb-2 text-2xl font-medium text-gray-800">
-                    Share on social
+                Share on social
                 </h1>
             </div>
             <div className="flex justify-center">
@@ -75,6 +80,7 @@ export default function ShareHandler(props){
                 <ClipboardCopy copyText="Your link"/>
             </div>
         </div>
+        </Row>        
         </>
     );
 }

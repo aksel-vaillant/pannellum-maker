@@ -3,7 +3,7 @@ import React from 'react';
 import InputFileHandler from '../components/InputFileHandler';
 import PanoramaHandler from "../components/PanoramaHandler";
 
-import { Row, StepperControl, StepperItem, StepperList} from "../components/design";
+import { StepperControl, StepperItem, StepperList} from "../components/design";
 import ShareHandler from '../components/ShareHandler';
 import { ArrowRightCircleIcon } from '@heroicons/react/20/solid'
 
@@ -27,13 +27,7 @@ function StepperPanel(props) {
       }
       else {
           return (
-            <div style={{ color: 'black' }}>
-                <h1 className="text-center mb-11 text-3xl font-medium text-gray-800">Good job! Now, share it with your friends or directly on your socials</h1>
-                <Row>
-                  <img className="border-2 border-black" src={imageURL}/>
-                  <ShareHandler></ShareHandler>
-                </Row>
-            </div>
+            <ShareHandler src={imageURL}></ShareHandler>
           )
       }
   }
