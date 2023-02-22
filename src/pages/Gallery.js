@@ -1,49 +1,101 @@
 import React from "react";
 import Gallery from "react-photo-gallery";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import dropdownMenu from "../components/design/dropdownMenu";
 import { Row } from "../components/design";
 import Example from "../components/design/dropdownMenu";
-import StackGrid from "react-stack-grid";
 
+import FsLightbox from "fslightbox-react";
+import PanoramaViewer from "../components/layout/PanoramaViewer";
 
 export default function PanGallery(props){
-
-  let newGrid;
-  const firstUpdate = useRef(true);
-
-  const gridRefFunction = (grid) => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-  }if(newGrid){
-        newGrid = grid;
-    console.log(newGrid);
-    newGrid.updateLayout();
-  }
-  };
-
   
   const photos = [
     {
-      src: "../test2.jpeg",
+      src: "https://source.unsplash.com/2ShvY8Lf6l0/800x599",
+      width: 4,
+      height: 3,
       favorite : "true"
     },
     {
-      src: "../coop.jpg",
-      favorite : "true"
+      src: "https://source.unsplash.com/Dm-qxdynoEc/800x799",
+      width: 1,
+      height: 1
     },
     {
-      src: "../test2.jpeg",
-      favorite : "true"
+      src: "https://source.unsplash.com/qDkso9nvCg0/600x799",
+      width: 3,
+      height: 4
     },
     {
-      src: "../test2.jpeg",
-      favorite : "true"
+      src: "https://source.unsplash.com/iecJiKe_RNg/600x799",
+      width: 3,
+      height: 4
     },
     {
-      src: "../coop.jpg",
-      favorite : "true"
+      src: "https://source.unsplash.com/epcsn8Ed8kY/600x799",
+      width: 3,
+      height: 4
+    },
+    {
+      src: "https://source.unsplash.com/NQSWvyVRIJk/800x599",
+      width: 4,
+      height: 3
+    },
+    {
+      src: "https://source.unsplash.com/zh7GEuORbUw/600x799",
+      width: 3,
+      height: 4
+    },
+    {
+      src: "https://source.unsplash.com/PpOHJezOalU/800x599",
+      width: 4,
+      height: 3
+    },
+    {
+      src: "https://source.unsplash.com/I1ASdgphUH4/800x599",
+      width: 4,
+      height: 3
+    },
+    {
+      src: "https://source.unsplash.com/XiDA78wAZVw/600x799",
+      width: 3,
+      height: 4
+    },
+    {
+      src: "https://source.unsplash.com/x8xJpClTvR0/800x599",
+      width: 4,
+      height: 3
+    },
+    {
+      src: "https://source.unsplash.com/u9cG4cuJ6bU/4927x1000",
+      width: 4927,
+      height: 1000
+    },
+    {
+      src: "https://source.unsplash.com/qGQNmBE7mYw/800x599",
+      width: 4,
+      height: 3
+    },
+    {
+      src: "https://source.unsplash.com/NuO6iTBkHxE/800x599",
+      width: 4,
+      height: 3
+    },
+    {
+      src: "https://source.unsplash.com/pF1ug8ysTtY/600x400",
+      width: 4,
+      height: 3
+    },
+    {
+      src: "https://source.unsplash.com/A-fubu9QJxE/800x533",
+      width: 4,
+      height: 3
+    },
+    {
+      src: "https://source.unsplash.com/5P91SF0zNsI/740x494",
+      width: 4,
+      height: 3
     }
   ];
 
@@ -77,8 +129,8 @@ export default function PanGallery(props){
   ];
 
   const handleSearchTerm = (e) => {
-      let value = e.target.value;
-      setSearchTerm(value);
+    let value = e.target.value;
+    setSearchTerm(value);
   };
 
   const getData = (data) =>{
@@ -86,17 +138,31 @@ export default function PanGallery(props){
     setUserAction(data);
   }  
   
-  let photoUpdate = photos.filter((photos) =>{
+  let photoUpdate = photos
+  // Bar search
+  .filter((photos) =>{
+    //this.grid.updateLayout();
     return photos.src.includes(searchTerm);
   })
-  // First, we realize a filter
+  // Filter
   .filter(sort[userAction].function)
-  // Then, we sort the result
+  // Sort
   .sort(sort[userAction].function)
-      
+
+  let [currentPhoto, setCurrentPhoto] = useState("");
+  const [toggler, setToggler] = useState(false);
+  const ref = React.createRef();
+
+  const handleLightbox = ((event, { photo, index }) => {
+    console.log(photo.src);
+    setCurrentPhoto(photo);
+    setToggler(!toggler);
+  });
+
   return(
     <>
-      <h1 className="text-2xl">Gallery</h1> <hr className="border-black my-5"/>
+      <h2 className="my-5 text-gray-800 text-3xl font-bold">Gallery</h2>
+      <hr className="border-b-2 border-b-black "/>
       <Row justify="justify-between" gap="gap-2" className="my-5">
         <Example onSubmit={getData} sort={sort} valueChangeCallback={getData}></Example>
 
@@ -105,17 +171,29 @@ export default function PanGallery(props){
         </div>
       </Row>
 
-      {//photoUpdate.length > 0 ? (<Gallery photos={photoUpdate} direction={"column"} margin={10}></Gallery>) : (<p className="w-full text-center mt-12">Sorry, there's no file corresponding to your search</p>)}           
-      }<StackGrid gridRef={gridRefFunction} columnWidth={"33.33%"} gutterWidth={20} gutterHeight={20}>
-        {photoUpdate.map((photo, index) =>{(
-          <figure className="block m-0" key={index}>
-          <img src={photo.src}></img>
-          <figcaption>{photo.src}</figcaption>
-          </figure>
-          );
-        newGrid ? newGrid.updateLayout() : "";
-        })}
-        </StackGrid>
+      {
+        photoUpdate.length > 0 ? (
+            <Gallery 
+              photos={photoUpdate} direction={"column"} margin={10} 
+              onClick={handleLightbox}
+            />
+          ) : (
+            <p className="w-full text-center mt-12">Sorry, there's no file corresponding to your search</p>
+          )           
+      }
+      
+      <FsLightbox
+        toggler={toggler}
+        sources={[
+          <div style={{ width: "1000px", height: "600px" }}>
+            <PanoramaViewer forwardedRef={ref} src={currentPhoto.src}/>
+          </div>
+        ]}
+      />
+      
     </>
   )
 }
+
+//<img src={currentPhoto.src}></img>
+//<PanoramaViewer forwardedRef={ref} src={currentPhoto.src}/>

@@ -1,8 +1,6 @@
 import React from "react";
 
 export default function Help(props) {
-
-    
     const [name, setName] = React.useState();
     const [mail, setMail] = React.useState();
     const [cc, setCC] = React.useState(true);

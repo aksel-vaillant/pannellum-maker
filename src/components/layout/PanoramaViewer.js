@@ -96,12 +96,6 @@ const PanoramaViewer = React.forwardRef((props, forwardedRef) => {
                 autoLoad
                 //autoRotate={8}
                 showControls
-
-                // Gère l'intégralité des évènements => avec un message dans la console
-                onLoad={()=>{console.log("panorama loaded");}}
-                onScenechange={(id)=>{console.log("Scene has change on " + id);}}
-                onError={(err)=>{console.log("Error" , err);}}
-                
             />     
         </div>
     )
