@@ -3,16 +3,16 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import { ChevronDownIcon, PlusIcon } from '@heroicons/react/20/solid'
 
-export default function Example(props) {
+export default function DropdownMenu(props) {
 
   const[action, setAction] = useState("");
   const handleChange = (e) => {
-      setAction(e.target.value);
+    setAction(e.target.value);
   }
 
   const handleSubmit = (e) =>{
     e.preventDefault();
-    props.onSubmit(action)
+    props.onSubmit(action);
   }
 
   return (

@@ -1,17 +1,13 @@
 import React, { useEffect } from 'react';
 
-import Logo from "./Logo";
-import Row from "./Row";
-import Button from "./Button";
-
 import Home from '../../pages/Home'
 import PanGallery from '../../pages/Gallery'
 import Help from '../../pages/Help'
 import Edit from '../../pages/Edit'
 
+import {Logo, Row, Button, NavbarProfile} from "./index"
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import { getCurrentUser, signInUserByGoogle, signOutUser } from '../../service/firebase_service'
-import NavbarProfile from './NavbarProfile';
 
 export default function Navbar(props){
 
