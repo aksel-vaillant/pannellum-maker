@@ -7,14 +7,14 @@ export default function Help(props) {
     const [body, setBody] = React.useState();
 
     const handleSummit = (e) => {
-        let defaultBody = "From " + name + " [" + mail + "],\n\n";
-        defaultBody += "My message :\n\n";
-        defaultBody += body;
+      let defaultBody = "From " + name + " [" + mail + "],\n\n";
+      defaultBody += "My message :\n\n";
+      defaultBody += body;
 
-        let mailCC = (cc===true)? "?cc=" + mail + "&": "?";
+      let mailCC = (cc===true)? "?cc=" + mail + "&": "?";
 
-        window.location.href = "mailto:aksel.vaillant@outlook.fr"+ mailCC +"subject=Message from Pannellum&body=" + encodeURI(defaultBody);
-    }
+      window.location.href = "mailto:aksel.vaillant@outlook.fr"+ mailCC +"subject=Message from Pannellum&body=" + encodeURI(defaultBody);
+  }
 
   return (
     <>
@@ -105,25 +105,26 @@ export default function Help(props) {
                     <input
                     type="text"
                     className="form-control block
-                w-full
-                px-3
-                py-1.5
-                text-base
-                font-normal
-                text-gray-700
-                bg-white bg-clip-padding
-                border border-solid border-gray-300
-                rounded
-                transition
-                ease-in-out
-                m-0
-                focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                      w-full
+                      px-3
+                      py-1.5
+                      text-base
+                      font-normal
+                      text-gray-700
+                      bg-white bg-clip-padding
+                      border border-solid border-gray-300
+                      rounded
+                      transition
+                      ease-in-out
+                      m-0
+                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                 
                     onChange={(e) => {
                         setName(e.target.value);
                     }}
                     id="exampleInput7"
                     placeholder="Name"
+                    defaultValue={props.user?.displayName}
                     />
                 </div>
                 <div className="form-group mb-6">
@@ -148,6 +149,7 @@ export default function Help(props) {
                     }}
                     id="exampleInput8"
                     placeholder="Email address"
+                    defaultValue={props.user?.email}
                     />
                 </div>
                 <div className="form-group mb-6">

@@ -1,34 +1,50 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+
+import { StepperControl, StepperItem, StepperList} from "../components/design";
 
 import InputFileHandler from '../components/InputFileHandler';
 import PanoramaHandler from "../components/PanoramaHandler";
-
-import { StepperControl, StepperItem, StepperList} from "../components/design";
 import ShareHandler from '../components/ShareHandler';
-import { ArrowRightCircleIcon } from '@heroicons/react/20/solid'
+
+import { setPannellum, setFiles } from '../service/firebase_service';
 
 function StepperPanel(props) {
 
-  const [imageURL, setImageURL] = React.useState(null);
+  const [mediaFile, setMediaFile] = React.useState(null);
+  const [configFile, setConfigFile] = React.useState(null);
 
-  const handleCallback = (childData) => {
-    setImageURL(childData);
+  const handleFileMedia = (media) => {
+    setMediaFile(media);
+    console.log(media);
   }
+
+  const handleFileConfig = (config) => {
+    setConfigFile(config);
+    console.log(config);
+  }
+
+  useEffect(() => {
+    if(props.value === 3)
+      setPannellum(configFile, mediaFile);
+  });
 
   if (props.value === 1) {
     return (
-        <InputFileHandler parentCallback={handleCallback} />
+        <InputFileHandler parentCallback={handleFileMedia} />
     )}
   else {
       if (props.value === 2) {
           return (
-              <PanoramaHandler src={imageURL}/>
+              <PanoramaHandler parentCallback={handleFileConfig} src={URL.createObjectURL(mediaFile)}/>
           )
       }
-      else {
+      else {  
+        if (props.value === 3) {
+
           return (
-            <ShareHandler src={imageURL}></ShareHandler>
+            <ShareHandler src={URL.createObjectURL(mediaFile)}></ShareHandler>
           )
+        }
       }
   }
 }

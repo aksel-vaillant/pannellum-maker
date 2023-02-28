@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import Logo from "./Logo";
 import Row from "./Row";
@@ -10,8 +10,34 @@ import Help from '../../pages/Help'
 import Edit from '../../pages/Edit'
 
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
+import { getCurrentUser, signInUserByGoogle, signOutUser } from '../../service/firebase_service'
+import NavbarProfile from './NavbarProfile';
 
 export default function Navbar(props){
+
+    let [isConnected, setIsConnected] = React.useState(false);
+    let [user, setUser] = React.useState(getCurrentUser());
+
+    const fetchSignIn = async () => {
+        let u = await signInUserByGoogle();
+        setUser(u);
+        setIsConnected(true);
+    }
+
+    const fetchDisconnect = async () => {
+        window.localStorage.removeItem("user");
+
+        await signOutUser();
+        setUser("");        
+        setIsConnected(false);
+    }
+
+    useEffect(() => {
+        if(user){
+            setIsConnected(true);
+        }
+    })
+
     return(
         <Router>
             <Row justify="justify-between" gap="gap-7">
@@ -29,15 +55,44 @@ export default function Navbar(props){
                     <Link to="/help">Help</Link>
                 </Button>
 
-                <Button round="medium" size="normal">
-                    <Link to="/edit">Get started</Link>
-                </Button>  
+                {
+                    !isConnected ? (
+                        <Button round="medium" size="normal" function={fetchSignIn}>
+                            Sign in
+                        </Button>
+                    )
+                    :(
+                        <NavbarProfile user={user}>
+                            <Link 
+                                to="/edit"
+                                className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+                                Create a pannellum
+                            </Link>
+                            <Link 
+                                to="/"
+                                className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+                                My profile
+                            </Link>
+                            <Link 
+                                to="/"
+                                className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+                                My favorites
+                            </Link>
+                            <Link 
+                                to="/"
+                                className='group flex w-full items-center rounded-md px-2 py-2 text-sm'
+                                onClick={fetchDisconnect}>
+                                Sign out
+                            </Link>
+                        </NavbarProfile>
+                    )
+                }
             </Row>
             
             <Routes>
                 <Route exact path='/' element={<Home/>}></Route>
                 <Route exact path='/gallery' element={< PanGallery />}></Route>
-                <Route exact path='/help' element={< Help />}></Route>
+                <Route exact path='/help' element={< Help user={user}/>}></Route>                
                 <Route exact path='/edit' element={< Edit />}></Route>
             </Routes>
         </Router>       

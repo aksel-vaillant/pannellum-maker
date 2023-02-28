@@ -1,6 +1,5 @@
 import React, {useEffect, useRef} from "react";
 import { Pannellum } from "pannellum-react";
-import data from "./data.json";
 
 function useFallbackRef(forwardedRef) {
     const fallbackRef = useRef(null)
@@ -11,13 +10,12 @@ const PanoramaViewer = React.forwardRef((props, forwardedRef) => {
     // Référence pour le panorama => pour récupérer les informations selon les évènements etc
     const panRef = useFallbackRef(forwardedRef)
 
-    // Données à partir du fichier config JSON
-    let panConfig = data;
-
-    // Données hotspots
-    let hotspots = panConfig.hotSpots;
+    // Données à partir du fichier config JSON    
+    let panConfig = props.config;
 
     useEffect(() => {
+        let hotspots = panConfig.hotSpots;
+
         hotspots.map((hotspot, index) => {
             // Create tooltip function
             let tooltipFunc = (hotSpotDiv) => {
@@ -73,11 +71,10 @@ const PanoramaViewer = React.forwardRef((props, forwardedRef) => {
                 clickHandlerArgs: hotspot.clickHandlerArgs
             });
         });
-    }, [panRef])
+    }, [panRef]);
 
     return (
         <div id="panorama">
-
             <Pannellum
                 ref={panRef}
                 id="firstScene"
@@ -96,6 +93,8 @@ const PanoramaViewer = React.forwardRef((props, forwardedRef) => {
                 autoLoad
                 //autoRotate={8}
                 showControls
+
+                onLoad={()=>{console.log("panorama loaded");}}
             />     
         </div>
     )

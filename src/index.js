@@ -6,12 +6,10 @@ import reportWebVitals from './reportWebVitals';
 
 import { Navbar } from "./components/design";
 
-export default function App() {
-  
-
+export default function App() {  
   return (
       <>
-        <div className="bg-cover bg-[url('/public/hhh.png')] w-full h-screen">   
+        <div className="bg-cover bg-[url('/public/hhh.png')] w-full">   
           <div className="w-10/12 mx-auto">
             <Navbar/>
           </div>       

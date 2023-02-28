@@ -6,13 +6,13 @@ export default function InputFileHandler({parentCallback}){
 	const [isSelected, setIsSelected] = useState(false);
 
 	const changeHandler = (event) => {
-        let myFile = event.target.files[0];
+        let file = event.target.files[0];
 		setIsSelected(true);
 
-        let fileToURL = URL.createObjectURL(myFile);
+        parentCallback(file);
 
-        setSelectedFile(fileToURL);
-        parentCallback(fileToURL);
+        let fileToPicture = URL.createObjectURL(file);
+        setSelectedFile(fileToPicture);
 	};
 
     async function changeURLHandler (e) {
@@ -21,11 +21,11 @@ export default function InputFileHandler({parentCallback}){
 
         let response = await fetch(e.target.value);
         let data = await response.blob();
-        console.log(data);
-        let fileToURL = new File([data], "image", {type : data.type, size : data.size});        
-        
-        setSelectedFile(URL.createObjectURL(fileToURL));        
-        parentCallback(myURL);
+        let file = new File([data], "mediaFile", {type : data.type, size : data.size});        
+        parentCallback(file);
+
+        let fileToPicture = URL.createObjectURL(file);
+        setSelectedFile(fileToPicture);        
     }
 
 	/*const handleSubmission = () => {

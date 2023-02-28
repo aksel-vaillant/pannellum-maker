@@ -6,7 +6,7 @@ import {Callout, Row, Button} from "./design";
 import * as Slider from '@radix-ui/react-slider';
 import "../styles/@radix-ui_slider.css";
 
-export default function PanoramaHandler (props) {
+export default function PanoramaHandler ({src, parentCallback}) {
     // Référence pour les hotspots => plus simple à manipuler dans la globalité
     let [idHS, setIDHS] = React.useState(0);
 
@@ -20,7 +20,6 @@ export default function PanoramaHandler (props) {
     let [isEditingTitle, setIsEditingTitle] = React.useState(false);
 
     // Affichage des panneaux
-    let [json, setJSON] = React.useState(0);
     let [edit, setList] = React.useState(0);
     
     // Référence pour le panorama => pour récupérer les informations selon les évènements etc
@@ -147,8 +146,8 @@ export default function PanoramaHandler (props) {
         let data = hotspotArray.map((hotspot) => (
             <tr key={hotspot.id}>
                 <td>{hotspot.id}</td>
-                <td>{hotspot.handleClickArg.name}</td>
-                <td>{hotspot.handleClickArg.description}</td>
+                <td>{hotspot.clickHandlerArgs.name}</td>
+                <td>{hotspot.clickHandlerArgs.description}</td>
                 <td>
                     <Button 
                         variant="warning" size="min"
@@ -229,19 +228,11 @@ export default function PanoramaHandler (props) {
         };
 
         // Permet de faire un fichier json
-        const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-            JSON.stringify(jsonConfig)
-        )}`;
-        const link = document.createElement("a");
-        link.href = jsonString;
-        link.download = "data.json";
+        const json = JSON.stringify(jsonConfig);
 
-        link.click();
-        return jsonConfig;
-    }
+        const blob = new Blob([json], { type: "application/json" });
 
-    function toggleScreen(){
-        panImage.current.getViewer().toggleFullscreen();
+        return blob;
     }
 
     return (
@@ -292,8 +283,8 @@ export default function PanoramaHandler (props) {
                 width="100%"
                 height="350px"
                 
-                image={props.src}
-                preview={props.src}
+                image={src}
+                preview={src}
                 title={defaultTitle}
                 previewTitle={defaultTitle}
                 author="Aksel & Clément"
@@ -340,21 +331,13 @@ export default function PanoramaHandler (props) {
                             Ajouter un hotspot ✨
                     </Button>
 
-                    <Button
-                        size="large" 
-                        function={() => {
-                            toggleScreen();
-                        }}>
-                            Voir la liste 🎯
-                    </Button>
-
                     <Button 
                         variant="light"
                         size="large"
                         function={() => {
-                            setJSON(convertToJSON());
+                            parentCallback(convertToJSON());
                         }}>
-                            Exporter en JSON 🚀
+                            Save your Pannellum 🚀
                     </Button>
                 </Row>                
             </Callout>
@@ -365,17 +348,7 @@ export default function PanoramaHandler (props) {
                 <Callout className="my-5">
                     {edit}
                 </Callout>)
-            }
-
-            {
-                json !== 0 && (
-                
-                <Callout className="my-5">
-                    <pre>
-                        {JSON.stringify(json, null, 2)}
-                    </pre>
-                </Callout>)
-            }            
+            }     
         </div>
     );
 };
