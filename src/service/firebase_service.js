@@ -16,10 +16,8 @@ let user = false;
 /*               PANNELLUM               */
 
 export const fetchJSON = async urlConfigFile => {
-    let jsonObject;
-    await fetch(urlConfigFile)
-        .then(response => response.json())
-        .then(json => jsonObject = json) 
+    let response = await fetch(urlConfigFile);
+    let jsonObject = await response.json();
     return jsonObject;
 }
 
@@ -263,7 +261,9 @@ export const signInUserByPassword = async (email, password) => {
     return user;
 }
 
-export const signOutUser = async () => {    
+export const signOutUser = async () => {
+    window.localStorage.removeItem("user");
+    
     await signOut(getFBAuth()).then(() => {
         user = false;
     }).catch((error) => {

@@ -20,19 +20,17 @@ export default function Navbar(props){
         setIsConnected(true);
     }
 
-    const fetchDisconnect = async () => {
-        window.localStorage.removeItem("user");
-
+    const fetchDisconnect = async () => {        
+        setIsConnected(false);
         await signOutUser();
         setUser("");        
-        setIsConnected(false);
     }
 
     useEffect(() => {
         if(user){
             setIsConnected(true);
         }
-    })
+    }, [user])
 
     return(
         <Router>
