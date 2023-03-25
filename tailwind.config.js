@@ -31,6 +31,9 @@ module.exports = {
         text: 'text 5s ease infinite',
         headShake: 'headShake 2s infinite',
       },
+      fontFamily: {
+        body: ['Didact', 'sans-serif']
+      },
     },
   },
   plugins: [],

@@ -5,7 +5,7 @@ import Footer from "./Footer";
 import Logo from "./Logo";
 import Navbar from './Navbar';
 import NavbarProfile from "./NavbarProfile";
-import DropdownMenu from "./DropdownMenu";
+import DropdownMenu from "./dropdownMenu";
 
 import StepperItem from "./StepperItem"
 import StepperControl from "./StepperControl"

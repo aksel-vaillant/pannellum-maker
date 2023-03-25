@@ -37,6 +37,7 @@ export default function Navbar(props){
     return(
         <Router>
             <Row justify="justify-between" gap="gap-7">
+                <img className=" w-24" src="../LOGO1.png"></img>
                 <Logo></Logo>
         
                 <Button variant="classic" size="small" animation="underline">
