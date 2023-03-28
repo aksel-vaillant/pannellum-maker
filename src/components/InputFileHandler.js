@@ -34,7 +34,7 @@ export default function InputFileHandler({parentCallback}){
 
     return (
         <>
-            <div className="mt-4 mx-auto flex flex-col justify-center items-center gap-y-4 text-black text-center">
+            <div className="mt-4 mx-auto flex flex-col justify-center items-center gap-y-4 text-white text-center">
                 <h1 className="text-3xl text-bold mb-6 flex flex-row gap-x-1 justify-center">Import your 36
             
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6 mt-2">
@@ -44,7 +44,7 @@ export default function InputFileHandler({parentCallback}){
                 photos
                 </h1>
 
-                <label htmlFor="upload" className="w-56 flex flex-row justify-center gap-x-1 py-2 px-2 text-center rounded-full hover:cursor-pointer bg-gray-800 hover:bg-gray-900 text-white font-medium">
+                <label htmlFor="upload" className="w-56 flex flex-row justify-center gap-x-1 py-2 px-2 text-center rounded-full hover:cursor-pointer bg-blue-600 hover:bg-blue-700 text-white font-medium">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mt-0.5">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                     </svg>

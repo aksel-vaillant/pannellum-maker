@@ -19,8 +19,8 @@ export default function StepperItem(props){
     let lastLi = props.isLast ? "" : `md:w-full after:content-[''] after:w-full after:h-1 after:border-b after:border-gray-200 after:border-1 after:hidden sm:after:inline-block after:mx-4 xl:after:mx-4 dark:after:border-gray-700`;
     let lastSpan = props.isLast ? "" : `after:content-['/'] sm:after:hidden after:mx-4 after:font-light after:text-gray-200 dark:after:text-gray-500`;
     
-    let validatedColor = props.validated ? `text-blue-500 dark:text-blue-500` : "";
-    let current = props.current ? `text-black font-bold` : validatedColor;
+    let validatedColor = props.validated ? `text-blue-500 dark:text-gray-200` : "";
+    let current = props.current ? `text-blue-400 font-bold` : validatedColor;
 
     let separatedText = props.name.split(" ").map(function(value) {
         return (

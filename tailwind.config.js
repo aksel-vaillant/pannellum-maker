@@ -8,6 +8,15 @@ module.exports = {
       backgroundImage : {
         test : "url('/public/test2.jpeg')",
       },
+      colors : {
+        blue : {
+          dark : "#0A192F",
+          light : "1E324E"
+        },
+        gray : {
+          light : "C4C4C4"
+        }
+      },
       keyframes: {
         text: {
           '0%, 100%': {

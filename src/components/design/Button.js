@@ -4,7 +4,7 @@ const classes = {
     disabled : `hover:cursor-not-allowed opacity-50`,
     animation : {
         default : `hover:cursor-pointer`,
-        underline : `link link-underline link-underline-black `,
+        underline : `link link-underline link-underline-gray `,
         shake : `hover:animate-headShake`,
         bounce : `animate-bounce`
     },       
@@ -20,10 +20,10 @@ const classes = {
         large: 'w-56'
     },
     variant : {
-        classic : `text-black font-medium`,
+        classic : `text-white font-medium`,
         default : `bg-blue-500 hover:bg-blue-600 text-white font-medium`,
-        light : `bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium`,
-        dark : `bg-gray-800 hover:bg-gray-900 text-white font-medium`,
+        light : `bg-gray-100 hover:bg-gray-200 text-black font-medium`,
+        dark : `bg-blue-400 hover:bg-blue-600 text-white font-medium`,
         success : `bg-green-500 hover:bg-green-600 text-white font-medium`,
         warning : `bg-red-500 hover:bg-red-600 text-white font-medium`
     }    

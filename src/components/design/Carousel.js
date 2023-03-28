@@ -31,8 +31,8 @@ const Carousel = (slides) =>{
     return(
         <>
             <div className=" mb-10 flex-wrap justify-center items-center">
-                <ArrowLeftCircleIcon className="absolute bottom-4 w-10 left-52 cursor-pointer select-none" onClick={prevSlide}/> 
-                <ArrowRightCircleIcon className="absolute bottom-4 w-10 right-52 cursor-pointer select-none" onClick={nextSlide}/>
+                <ArrowLeftCircleIcon className="text-white absolute bottom-4 w-10 left-52 cursor-pointer select-none" onClick={prevSlide}/> 
+                <ArrowRightCircleIcon className="text-white absolute bottom-4 w-10 right-52 cursor-pointer select-none" onClick={nextSlide}/>
             {sliderData.map((slide, index) =>{
                     return (
                         <div className="flex w-full h-2/6 justify-center items-center items-center" key ={index}>

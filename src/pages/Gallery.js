@@ -132,7 +132,7 @@ export default function PanGallery(props){
 
   return(
     <>
-      <h2 className="my-5 text-gray-800 text-3xl font-bold">Gallery</h2>
+      <h2 className="text-white my-5 text-3xl font-bold">Gallery</h2>
       <hr className="border-b-2 border-b-black "/>
       <Row justify="justify-between" gap="gap-2" className="my-5">
         <DropdownMenu onSubmit={getData} sort={sort} valueChangeCallback={getData}></DropdownMenu>
@@ -148,7 +148,7 @@ export default function PanGallery(props){
               renderImage={imageRenderer}
             />        
           ) : (
-            <p className="w-full text-center mt-12">Sorry, there's no file corresponding to your search</p>
+            <p className="text-white w-full text-center mt-12">Sorry, there's no file corresponding to your search</p>
           )           
       }
       

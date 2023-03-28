@@ -19,20 +19,20 @@ export default function Help(props) {
   return (
     <>
         <div className="mt-5 mb-16 text-gray-800">
-        <h2 className="text-3xl font-bold">Frequently asked questions</h2>
-        <p className="mb-12 mt-5">
+        <h2 className="text-white text-3xl font-bold">Frequently asked questions</h2>
+        <p className="text-white mb-12 mt-5">
           Here we have some of the most frequently asked questions.
           <br />
           If you need any further information not listed in here, please contact
           us at hello@pixexid.com.
         </p>
 
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="text-white grid lg:grid-cols-3 gap-6">
           <div className="mb-12">
             <p className="font-bold mb-4">
               Anim pariatur cliche reprehenderit?
             </p>
-            <p className="text-gray-500">
+            <p className="text-white -500">
               Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sunt
               autem numquam dolore molestias aperiam culpa alias veritatis
               architecto eos, molestiae vitae ex eligendi libero eveniet
@@ -44,7 +44,7 @@ export default function Help(props) {
             <p className="font-bold mb-4">
               Non cupidatat skateboard dolor brunch?
             </p>
-            <p className="text-gray-500">
+            <p className="text-white-500">
               Distinctio corporis, iure facere ducimus quos consectetur ipsa ut
               magnam autem doloremque ex! Id, sequi. Voluptatum magnam sed fugit
               iusto minus et suscipit? Minima sunt at nulla tenetur, numquam
@@ -57,7 +57,7 @@ export default function Help(props) {
             <p className="font-bold mb-4">
               Praesentium voluptatibus temporibus consequatur non aspernatur?
             </p>
-            <p className="text-gray-500">
+            <p className="text-white-500">
               Minima sunt at nulla tenetur, numquam unde quod modi magnam ab
               deserunt ipsam sint aliquid dolores libero repellendus cupiditate
               mollitia quidem dolorem.
@@ -68,7 +68,7 @@ export default function Help(props) {
             <p className="font-bold mb-4">
               Voluptatum magnam sed fugit iusto minus et suscipit?
             </p>
-            <p className="text-gray-500">
+            <p className="text-white-500">
               Laudantium perferendis, est alias iure ut veniam suscipit dolorem
               fugit. Et ipsam corporis earum ea ut quae cum non iusto blanditiis
               ipsum dolor eius reiciendis, velit adipisci quas.
@@ -77,7 +77,7 @@ export default function Help(props) {
 
           <div className="mb-12">
             <p className="font-bold mb-4">Minima sunt at nulla tenetur,?</p>
-            <p className="text-gray-500">
+            <p className="text-white-500">
               Numquam unde quod modi magnam ab deserunt ipsam sint aliquid
               dolores libero repellendus cupiditate mollitia quidem dolorem odit
             </p>
@@ -87,7 +87,7 @@ export default function Help(props) {
             <p className="font-bold mb-4">
               Distinctio corporis, iure facere ducimus?
             </p>
-            <p className="text-gray-500">
+            <p className="text-white-500">
               Eaque eos corrupti debitis tenetur repellat, beatae quibusdam
               incidunt, fuga non iste dignissimos officiis nam officia obcaecati
               commodi ratione qui nesciunt.
@@ -99,7 +99,7 @@ export default function Help(props) {
         <div className="my-24 px-6">
             <section className="mb-32 text-center text-gray-800">
             <div className="max-w-[700px] mx-auto px-3 lg:px-6">
-                <h2 className="text-3xl font-bold mb-12">Contact us</h2>
+                <h2 className="text-white text-3xl font-bold mb-12">Contact us</h2>
                 <form>
                 <div className="form-group mb-6">
                     <input
@@ -190,7 +190,7 @@ export default function Help(props) {
                     }}
                     />
                     <label
-                    className="form-check-label inline-block text-gray-800"
+                    className="form-check-label inline-block text-white"
                     htmlFor="exampleCheck87"
                     >
                     Send me a copy of this message
